@@ -166,8 +166,8 @@ function obtieneOpciones(){
 		break;
 		case "Autores":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="checkboxcheckboxcampo[]" value="Nombre"> <label>Nombre</label><br>'
-            +'<input type="checkbox" name="checkboxcheckboxcampo[]" value="LibrosEscritos"> <label>Libros Escritos</label><br>'
+            +'<input type="checkbox" name="checkboxcampo[]" value="Nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="checkboxcampo[]" value="LibrosEscritos"> <label>Libros Escritos</label><br>'
             +'';
 
             document.getElementById('restricciones-input').innerHTML = '<label class="">Restricciones:</label><br>'
@@ -214,8 +214,8 @@ function obtieneOpciones(){
 		break;
 		case "Editoriales":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="checkboxcheckboxcampo[]" value="Nombre"> <label>Nombre</label><br>'
-            +'<input type="checkbox" name="checkboxcheckboxcampo[]" value="LibrosVenta"> <label>Libros en venta</label><br>'
+            +'<input type="checkbox" name="checkboxcampo[]" value="Nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="checkboxcampo[]" value="LibrosVenta"> <label>Libros en venta</label><br>'
             +'';
 
         document.getElementById('restricciones-input').innerHTML = '<label class="">Restricciones:</label><br>'
