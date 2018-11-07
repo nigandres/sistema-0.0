@@ -105,12 +105,12 @@ function obtieneOpciones(){
 	switch(opt.text){
 		case "Libros":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="checkbox-nombre" value="Nombre"> <label>Nombre</label><br>'
-            +'<input type="checkbox" name="checkbox-ruta" value="Ruta"> <label>Ruta</label><br>'
-            +'<input type="checkbox" name="checkbox-area" value="Area"> <label>Area</label><br>'
-            +'<input type="checkbox" name="checkbox-tipo" value="Tipo"> <label>Tipo</label><br>'
-            +'<input type="checkbox" name="checkbox-autor" value="Autor"> <label>Autor</label><br>'
-            +'<input type="checkbox" name="checkbox-genero" value="Genero"> <label>Genero</label><br>'
+            +'<input type="checkbox" name="checkboxcampo[]" value="Nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="checkboxcampo[]" value="Ruta"> <label>Ruta</label><br>'
+            +'<input type="checkbox" name="checkboxcampo[]" value="Area"> <label>Area</label><br>'
+            +'<input type="checkbox" name="checkboxcampo[]" value="Tipo"> <label>Tipo</label><br>'
+            +'<input type="checkbox" name="checkboxcampo[]" value="Autor"> <label>Autor</label><br>'
+            +'<input type="checkbox" name="checkboxcampo[]" value="Genero"> <label>Genero</label><br>'
             +'';
 
             document.getElementById('restricciones-input').innerHTML = '<label class="">Restricciones:</label><br>'
@@ -166,8 +166,8 @@ function obtieneOpciones(){
 		break;
 		case "Autores":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="checkbox-nombre" value="Nombre"> <label>Nombre</label><br>'
-            +'<input type="checkbox" name="checkbox-librosescritos" value="LibrosEscritos"> <label>Libros Escritos</label><br>'
+            +'<input type="checkbox" name="checkboxcheckboxcampo[]" value="Nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="checkboxcheckboxcampo[]" value="LibrosEscritos"> <label>Libros Escritos</label><br>'
             +'';
 
             document.getElementById('restricciones-input').innerHTML = '<label class="">Restricciones:</label><br>'
@@ -214,8 +214,8 @@ function obtieneOpciones(){
 		break;
 		case "Editoriales":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="checkbox-nombre" value="Nombre"> <label>Nombre</label><br>'
-            +'<input type="checkbox" name="checkbox-librosventa" value="LibrosVenta"> <label>Libros en venta</label><br>'
+            +'<input type="checkbox" name="checkboxcheckboxcampo[]" value="Nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="checkboxcheckboxcampo[]" value="LibrosVenta"> <label>Libros en venta</label><br>'
             +'';
 
         document.getElementById('restricciones-input').innerHTML = '<label class="">Restricciones:</label><br>'
