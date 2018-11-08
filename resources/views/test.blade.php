@@ -34,39 +34,41 @@
                                 @endisset
                         	</div>
                         	
-                        	<form action="{{asset('/home')}}" method="post" role="form">
+                            <form action="{{ action('LenguajeController@getAll') }}" method="post" role="form">
+                            <!-- <foarm action="{{asset('/home')}}" method="post" role="form"> -->
                         		{{ csrf_field() }}
-                            <div class="col-lg-12" id="body-form">
-                                <div class="col-lg-6" id="tabla-input">
-                                    <label class="">Seleccione sobre qué desea obtener datos:</label>
-                                    
-                                    <select name="tabla" class="form-control" onclick="obtieneOpciones();" id="tabla">
-                                        <option></option>
-                                        <option>Libros</option>
-                                        <option>Autores</option>
-                                        <option>Editoriales</option>
-                                    </select>
+                                <div class="col-lg-12" id="body-form">
+                                    <div class="col-lg-6" id="tabla-input">
+                                        <label class="">Seleccione sobre qué desea obtener datos:</label>
+                                        
+                                        <select name="tabla" class="form-control" onclick="obtieneOpciones();" id="tabla">
+                                            <option value=""></option>
+                                            <option value="libros">Libros</option>
+                                            <option value="autores">Autores</option>
+                                            <option value="editoriales">Editoriales</option>
+                                            <option value="alumno">-Alumnos-</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-lg-6" id="campos-input">
+                                        
+                                    </div>
+
+                                    <div class="col-lg-12" id="restricciones-input">
+                                        
+                                    </div>
+
+                                    <div></div>
 
                                 </div>
-                                <div class="col-lg-6" id="campos-input">
-                                    
+                                <br>
+                                <div class="col-lg-12">
+                                    <center>
+                                        <button class="btn btn-success btn-block" type="submit" id="btnSubmit" disabled="">
+                                            Realizar Consulta
+                                        </button>
+                                    </center>
                                 </div>
-
-                                <div class="col-lg-12" id="restricciones-input">
-                                    
-                                </div>
-
-                                <div></div>
-
-                            </div>
-                            <br>
-                            <div class="col-lg-12">
-                                <center>
-                                    <button class="btn btn-success btn-block" type="submit" id="btnSubmit" disabled="">
-                                        Realizar Consulta
-                                    </button>
-                                </center>
-                            </div>
                             
                             </form>
                                 	
@@ -105,55 +107,56 @@ function obtieneOpciones(){
 	switch(opt.text){
 		case "Libros":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="checkboxcampo[]" value="Nombre"> <label>Nombre</label><br>'
-            +'<input type="checkbox" name="checkboxcampo[]" value="Ruta"> <label>Ruta</label><br>'
-            +'<input type="checkbox" name="checkboxcampo[]" value="Area"> <label>Area</label><br>'
-            +'<input type="checkbox" name="checkboxcampo[]" value="Tipo"> <label>Tipo</label><br>'
-            +'<input type="checkbox" name="checkboxcampo[]" value="Autor"> <label>Autor</label><br>'
-            +'<input type="checkbox" name="checkboxcampo[]" value="Genero"> <label>Genero</label><br>'
+            +'<input type="checkbox" name="fields[]" value="Nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="fields[]" value="Ruta"> <label>Ruta</label><br>'
+            +'<input type="checkbox" name="fields[]" value="Area"> <label>Area</label><br>'
+            +'<input type="checkbox" name="fields[]" value="Tipo"> <label>Tipo</label><br>'
+            +'<input type="checkbox" name="fields[]" value="Autor"> <label>Autor</label><br>'
+            +'<input type="checkbox" name="fields[]" value="Genero"> <label>Genero</label><br>'
             +'';
 
             document.getElementById('restricciones-input').innerHTML = '<label class="">Restricciones:</label><br>'
     
             +'<label>Ordenar por:</label><br>'
             +'<select name="restriccion-ordenar" class="form-control">'
-                +'<option>Sin ordenar</option>'
-                +'<option>Nombre</option>'
-                +'<option>Area</option>'
-                +'<option>Tipo</option>'
-                +'<option>Autor</option>'
-                +'<option>Genero</option>'
+                +'<option value="">Sin ordenar</option>'
+                +'<option value="nombre">Nombre</option>'
+                +'<option value="area">Area</option>'
+                +'<option value="tipo">Tipo</option>'
+                +'<option value="autor">Autor</option>'
+                +'<option value="genero">Genero</option>'
             +'</select>'
 
             +'<label>Agrupar por:</label><br>'
             +'<select name="restriccion-agrupar" class="form-control">'
-                +'<option>Sin agrupar</option>'
-                +'<option>Nombre</option>'
-                +'<option>Area</option>'
-                +'<option>Tipo</option>'
-                +'<option>Autor</option>'
-                +'<option>Genero</option>'
+                +'<option value="">Sin agrupar</option>'
+                +'<option value="nombre">Nombre</option>'
+                +'<option value="area">Area</option>'
+                +'<option value="tipo">Tipo</option>'
+                +'<option value="autor">Autor</option>'
+                +'<option value="genero">Genero</option>'
             +'</select>'
 
             +'<div class="col-lg-4">'
             +'<label>Donde el:</label>'
             +'<select name="restriccion-dondeTabla" class="form-control">'
-                +'<option>Sin restriccion</option>'
-                +'<option>Nombre</option>'
-                +'<option>Area</option>'
-                +'<option>Tipo</option>'
-                +'<option>Autor</option>'
-                +'<option>Genero</option>'
+                +'<option value="">Sin restriccion</option>'
+                +'<option value="nombre">Nombre</option>'
+                +'<option value="area">Area</option>'
+                +'<option value="tipo">Tipo</option>'
+                +'<option value="autor">Autor</option>'
+                +'<option value="genero">Genero</option>'
             +'</select>'
             +'</div>'
             +'<div class="col-lg-4">'
             +'<label>Sea:</label>'
             +'<select name="restriccion-dondeOpcion" class="form-control">'
-                +'<option>Similar a</option>'
-                +'<option>Igual</option>'
-                +'<option>Mayor que</option>'
-                +'<option>Menor que</option>'
-                +'<option>Diferente de</option>'
+                +'<option value=""></option>'
+                +'<option value="like">Similar a</option>'
+                +'<option value="=">Igual</option>'
+                +'<option value=">">Mayor que</option>'
+                +'<option value="<">Menor que</option>'
+                +'<option value="<>">Diferente de</option>'
             +'</select>'
             +'</div>'
 
@@ -166,42 +169,43 @@ function obtieneOpciones(){
 		break;
 		case "Autores":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="checkboxcampo[]" value="Nombre"> <label>Nombre</label><br>'
-            +'<input type="checkbox" name="checkboxcampo[]" value="LibrosEscritos"> <label>Libros Escritos</label><br>'
+            +'<input type="checkbox" name="fields[]" value="Nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="fields[]" value="LibrosEscritos"> <label>Libros Escritos</label><br>'
             +'';
 
             document.getElementById('restricciones-input').innerHTML = '<label class="">Restricciones:</label><br>'
     
             +'<label>Ordenar por:</label><br>'
             +'<select name="restriccion-ordenar" class="form-control">'
-                +'<option>Sin ordenar</option>'
-                +'<option>Nombre</option>'
-                +'<option>Libros Escritos</option>'
+                +'<option value="">Sin ordenar</option>'
+                +'<option value="nombre">Nombre</option>'
+                +'<option value="libros_escritos">Libros Escritos</option>'
             +'</select>'
 
             +'<label>Agrupar por:</label><br>'
             +'<select name="restriccion-agrupar" class="form-control">'
-                +'<option>Sin agrupar</option>'
-                +'<option>Nombre</option>'
-                +'<option>Libros Escritos</option>'
+                +'<option value="">Sin agrupar</option>'
+                +'<option value="nombre">Nombre</option>'
+                +'<option value="libros_escritos">Libros Escritos</option>'
             +'</select>'
 
             +'<div class="col-lg-4">'
             +'<label>Donde el:</label>'
             +'<select name="restriccion-dondeTabla" class="form-control">'
-                +'<option>Sin restriccion</option>'
-                +'<option>Nombre</option>'
-                +'<option>Libros Escritos</option>'
+                +'<option value="">Sin restriccion</option>'
+                +'<option value="nombre">Nombre</option>'
+                +'<option value="libros_escritos">Libros Escritos</option>'
             +'</select>'
             +'</div>'
             +'<div class="col-lg-4">'
             +'<label>Sea:</label>'
             +'<select name="restriccion-dondeOpcion" class="form-control">'
-                +'<option>Similar a</option>'
-                +'<option>Igual</option>'
-                +'<option>Mayor que</option>'
-                +'<option>Menor que</option>'
-                +'<option>Diferente de</option>'
+                +'<option value=""></option>'
+                +'<option value="like">Similar a</option>'
+                +'<option value="=">Igual</option>'
+                +'<option value=">">Mayor que</option>'
+                +'<option value="<">Menor que</option>'
+                +'<option value="<>">Diferente de</option>'
             +'</select>'
             +'</div>'
 
@@ -214,42 +218,43 @@ function obtieneOpciones(){
 		break;
 		case "Editoriales":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="checkboxcampo[]" value="Nombre"> <label>Nombre</label><br>'
-            +'<input type="checkbox" name="checkboxcampo[]" value="LibrosVenta"> <label>Libros en venta</label><br>'
+            +'<input type="checkbox" name="fields[]" value="Nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="fields[]" value="LibrosVenta"> <label>Libros en venta</label><br>'
             +'';
 
         document.getElementById('restricciones-input').innerHTML = '<label class="">Restricciones:</label><br>'
     
             +'<label>Ordenar por:</label><br>'
             +'<select name="restriccion-ordenar" class="form-control">'
-                +'<option>Sin ordenar</option>'
-                +'<option>Nombre</option>'
-                +'<option>Libros En venta</option>'
+                +'<option value="">Sin ordenar</option>'
+                +'<option value="nombre">Nombre</option>'
+                +'<option value="libros_en_venta">Libros En venta</option>'
             +'</select>'
 
             +'<label>Agrupar por:</label><br>'
             +'<select name="restriccion-agrupar" class="form-control">'
-                +'<option>Sin agrupar</option>'
-                +'<option>Nombre</option>'
-                +'<option>Libros En venta</option>'
+                +'<option value="">Sin agrupar</option>'
+                +'<option value="nombre">Nombre</option>'
+                +'<option value="libros_en_venta">Libros En venta</option>'
             +'</select>'
 
             +'<div class="col-lg-4">'
             +'<label>Donde el:</label>'
             +'<select name="restriccion-dondeTabla" class="form-control">'
-                +'<option>Sin restriccion</option>'
-                +'<option>Nombre</option>'
-                +'<option>Libros En venta</option>'
+                +'<option value="">Sin restriccion</option>'
+                +'<option value="nombre">Nombre</option>'
+                +'<option value="libros_en_venta">Libros En venta</option>'
             +'</select>'
             +'</div>'
             +'<div class="col-lg-4">'
             +'<label>Sea:</label>'
             +'<select name="restriccion-dondeOpcion" class="form-control">'
-                +'<option>Similar a</option>'
-                +'<option>Igual</option>'
-                +'<option>Mayor que</option>'
-                +'<option>Menor que</option>'
-                +'<option>Diferente de</option>'
+                +'<option value=""></option>'
+                +'<option value="like">Similar a</option>'
+                +'<option value="=">Igual</option>'
+                +'<option value=">">Mayor que</option>'
+                +'<option value="<">Menor que</option>'
+                +'<option value="<>">Diferente de</option>'
             +'</select>'
             +'</div>'
 
