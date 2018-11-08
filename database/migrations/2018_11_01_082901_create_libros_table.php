@@ -13,7 +13,8 @@ class CreateLibrosTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mongodb')->create('libros', function($table)
+        Schema::connection('mongodb')->dropIfExists('libros');
+        Schema::connection('mongodb')->create('libros', function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('nombre');
@@ -48,6 +49,7 @@ class CreateLibrosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('libros');
+        Schema::connection('mongodb')->dropIfExists('libros');
+        Schema::connection('mongodb')->drop('libros');
     }
 }

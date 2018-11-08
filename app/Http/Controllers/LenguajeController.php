@@ -24,6 +24,10 @@ class LenguajeController extends Controller
         // $newlibro->save();
         // $newlibro = new Libro();
         // $newlibro->titulo = 'nepe';
+        // $newlibro->edicion = 1;
+        // $newlibro->save();
+        // $newlibro = new Libro();
+        // $newlibro->titulo = 'nepe';
         // $newlibro->edicion = 3;
         // $newlibro->save();
         // $newlibro = new Libro();
@@ -41,14 +45,14 @@ class LenguajeController extends Controller
 
         $modelos = collect(['Libro' => new Libro(),'Autor' => new Autor(),'Editorial' => new Editorial()]);
 
-        Request $request;
-        dd($modelos);
-        foreach ($modelos as $modelo) {
-            if($modelo->getTabla() == $request->input('tabla')){
-                $db = $modelo->getConexion();
-                $tabla = $modelo->getTabla();
-            }
-        }
+        // Request $request;
+        // dd($modelos);
+        // foreach ($modelos as $modelo) {
+        //     if($modelo->getTabla() == $request->input('tabla')){
+        //         $db = $modelo->getConexion();
+        //         $tabla = $modelo->getTabla();
+        //     }
+        // }
 
         $db = 'mongodb';
         $tabla = 'libros';
@@ -59,7 +63,7 @@ class LenguajeController extends Controller
         $agruparpor = array('titulo');
         $ordenarpor = 'edicion';
         $tipodeorden = 'asc';
-        $libroMongodb = Libro::all();
+        $libroMongodb = Autor::all();
         // $libroMongodb = Libro::where('titulo','=','ginava')->get();
         $librosos = DB::connection($db)->table($tabla)
         ->select($campos)
@@ -154,6 +158,12 @@ class LenguajeController extends Controller
     public function destroy(Lenguaje $lenguaje)
     {
         //
+    }
+
+    public function getAll(Request $request)
+    {
+        dd($request);
+        return $a;
     }
 
     public function gettables(Request $request)

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Autor extends Model
 {
-    protected $connection = 'mysql';
+    protected $connection = 'pgsql';
     protected $table = 'autores';
     public function getConexion()
     {

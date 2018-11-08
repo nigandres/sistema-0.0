@@ -13,7 +13,9 @@ class CreateAutorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('autores', function (Blueprint $table) {
+        Schema::connection('pgsql')->dropIfExists('autores');
+        // Schema::create('autores', function (Blueprint $table) {
+        Schema::connection('pgsql')->create('autores', function(Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             $table->timestamps();
@@ -27,6 +29,7 @@ class CreateAutorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('autores');
+        Schema::connection('pgsql')->dropIfExists('autores');
+        Schema::connection('pgsql')->drop('autores');
     }
 }
