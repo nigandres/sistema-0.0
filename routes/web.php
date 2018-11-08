@@ -30,3 +30,7 @@ Route::resource('/editorial','EditorialController');
 Route::resource('/autor','AutorController');
 Route::resource('/lenguaje','LenguajeController')->middleware('auth');
 Route::post('/lenguaje/obtener','LenguajeController@getAll')->middleware('auth');
+
+Route::get('/file-upload','RespaldosController@guardar');
+Route::get('/respaldos/cargar','RespaldosController@cargar');
+Route::post('/file-upload','RespaldosController@save');
