@@ -18,6 +18,11 @@ class LenguajeController extends Controller
      */
     public function index()
     {
+        dd("si jala");
+        // $newlibro = new Editorial();
+        // $newlibro->nombre = 'porrua';
+        // $newlibro->save();
+
         // $newlibro = new Libro();
         // $newlibro->titulo = 'nepe';
         // $newlibro->edicion = 1;
@@ -71,8 +76,8 @@ class LenguajeController extends Controller
         ->groupBy($agruparpor)
         ->orderBy($ordenarpor,$tipodeorden)
         // ->havingRaw('count(edicion) = 4')
-        // ->having('edicion', '=', '1')
-        ->get();
+        ->having('edicion', '=', '1')
+        ->toSql();
         // $librosos = DB::connection('mongodb')->table('libros')->where('titulo','=','nepe')->get();
         dd($libroMongodb,$librosos);
 
@@ -162,35 +167,47 @@ class LenguajeController extends Controller
 
     public function getAll(Request $request)
     {
-        dd($request);
-        return $a;
-    }
-
-    public function gettables(Request $request)
-    {
-        if($request->input('tipo') == 'tabla'){
-            $tabla = $request->input('tabla');
-            $columnas = DB::select('describe '.$tabla);
-            // dd($columnas,$request);
-            return view('lenguajes.LenguajeIndex',compact(['tabla','columnas']));
+        $db = null;
+        $tabla = null;
+        $campos = null;
+        $campocondicion = null;
+        $operadorcondicion = null;
+        $condicion = null;
+        $ordenarpor = null;
+        $agruparpor = null;
+        $tipodeorden = 'asc';
+        $modelos = collect(['Libro' => new Libro(),'Autor' => new Autor(),'Editorial' => new Editorial()]);
+        $librosos = null;
+        foreach ($modelos as $modelo) {
+            if($modelo->getTabla() == $request->input('tabla')){
+                $db = $modelo->getConexion();
+                $tabla = $modelo->getTabla();
+            }
         }
-        if($request->input('tipo') == 'columna'){
-            $tabla = $request->input('tabla');
-            $columns = $request->input('columna');
-            $metodos = collect(['having','group','sort','where','anidar']);;
-            // dd($metodos,$tabla,$columns,$request);
-            return view('lenguajes.LenguajeIndex',compact(['tabla','columns','metodos']));
+        $campos = $request->input('fields');
+        $campocondicion = $request->input('restriccion-dondeTabla');
+        $operadorcondicion = $request->input('restriccion-dondeOpcion');
+        $condicion = $request->input('restriccion-dondeValor');
+        $ordenarpor = $request->input('restriccion-ordenar');
+        $agruparpor = $request->input('restriccion-agrupar');
+        $librosos = DB::connection($db)->table($tabla);
+        if($campos != null){
+            $librosos = $librosos->select($campos);
         }
-        if($request->input('tipo') == 'metodo'){
-            $result = DB::table('areas')->where('id', 1)->get(['nombre','id']);
-            // Table::select('name','surname')->where('id', 1)->get();
-            dd($result);
-
-            // $tabla = $request->input('tabla');
-            // $columna = $request->input('columna');
-            // $metodos = collect(['having','group','sort','where','anidar']);;
-            // dd($metodos,$tabla,$columna,$request);
-            return view('lenguajes.LenguajeIndex',compact(['tabla','columna']));
+        if($campocondicion != null&&$operadorcondicion != null&&$condicion != null){
+            $librosos = $librosos->where($campocondicion,$operadorcondicion,$condicion);
         }
+        if( ($campocondicion == null||$operadorcondicion == null||$condicion == null) && ($campocondicion != null||$operadorcondicion != null||$condicion != null) ){
+            return redirect()->back()->with('message', 'faltan parametros en las entradas de la condicion');
+        }
+        if($agruparpor != null){
+            $librosos = $librosos->groupBy($agruparpor);
+        }
+        if($ordenarpor != null){
+            $librosos = $librosos->orderBy($ordenarpor,$tipodeorden);
+        }
+        $query = $librosos->get();
+        // dd($query,$db,$tabla,$campos,$request);
+        return view('lenguajes.LenguajeIndex',compact('query'));
     }
 }

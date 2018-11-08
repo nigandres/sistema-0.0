@@ -17,7 +17,13 @@
             <h1 class="page-header">Sistema 0.1</h1> 
         </div>
 
-		
+		<!-- poner en un archivo a parte -->
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+        <!--  -->
 		<div class="col-lg-12">
 
                     <div class="panel panel-default">
@@ -107,12 +113,12 @@ function obtieneOpciones(){
 	switch(opt.text){
 		case "Libros":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="fields[]" value="Nombre"> <label>Nombre</label><br>'
-            +'<input type="checkbox" name="fields[]" value="Ruta"> <label>Ruta</label><br>'
-            +'<input type="checkbox" name="fields[]" value="Area"> <label>Area</label><br>'
-            +'<input type="checkbox" name="fields[]" value="Tipo"> <label>Tipo</label><br>'
-            +'<input type="checkbox" name="fields[]" value="Autor"> <label>Autor</label><br>'
-            +'<input type="checkbox" name="fields[]" value="Genero"> <label>Genero</label><br>'
+            +'<input type="checkbox" name="fields[]" value="nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="fields[]" value="ruta"> <label>Ruta</label><br>'
+            +'<input type="checkbox" name="fields[]" value="area"> <label>Area</label><br>'
+            +'<input type="checkbox" name="fields[]" value="tipo"> <label>Tipo</label><br>'
+            +'<input type="checkbox" name="fields[]" value="autor"> <label>Autor</label><br>'
+            +'<input type="checkbox" name="fields[]" value="genero"> <label>Genero</label><br>'
             +'';
 
             document.getElementById('restricciones-input').innerHTML = '<label class="">Restricciones:</label><br>'
@@ -120,7 +126,7 @@ function obtieneOpciones(){
             +'<label>Ordenar por:</label><br>'
             +'<select name="restriccion-ordenar" class="form-control">'
                 +'<option value="">Sin ordenar</option>'
-                +'<option value="nombre">Nombre</option>'
+                +'<option value="titulo">Nombre</option>'
                 +'<option value="area">Area</option>'
                 +'<option value="tipo">Tipo</option>'
                 +'<option value="autor">Autor</option>'
@@ -130,7 +136,7 @@ function obtieneOpciones(){
             +'<label>Agrupar por:</label><br>'
             +'<select name="restriccion-agrupar" class="form-control">'
                 +'<option value="">Sin agrupar</option>'
-                +'<option value="nombre">Nombre</option>'
+                +'<option value="titulo">Nombre</option>'
                 +'<option value="area">Area</option>'
                 +'<option value="tipo">Tipo</option>'
                 +'<option value="autor">Autor</option>'
@@ -141,7 +147,7 @@ function obtieneOpciones(){
             +'<label>Donde el:</label>'
             +'<select name="restriccion-dondeTabla" class="form-control">'
                 +'<option value="">Sin restriccion</option>'
-                +'<option value="nombre">Nombre</option>'
+                +'<option value="titulo">Nombre</option>'
                 +'<option value="area">Area</option>'
                 +'<option value="tipo">Tipo</option>'
                 +'<option value="autor">Autor</option>'
