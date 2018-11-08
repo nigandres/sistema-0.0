@@ -18,6 +18,7 @@ class CreateEditorialsTable extends Migration
             $table->string('nombre');
             $table->timestamps();
         });
+        // nepe
     }
 
     /**
