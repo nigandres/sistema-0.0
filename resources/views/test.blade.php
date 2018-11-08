@@ -175,7 +175,7 @@ function obtieneOpciones(){
 		break;
 		case "Autores":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="fields[]" value="Nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="fields[]" value="nombre"> <label>Nombre</label><br>'
             +'<input type="checkbox" name="fields[]" value="LibrosEscritos"> <label>Libros Escritos</label><br>'
             +'';
 
@@ -224,7 +224,7 @@ function obtieneOpciones(){
 		break;
 		case "Editoriales":
 			document.getElementById('campos-input').innerHTML = '<label class="">Seleccione los campos a mostrar:</label><br>'
-            +'<input type="checkbox" name="fields[]" value="Nombre"> <label>Nombre</label><br>'
+            +'<input type="checkbox" name="fields[]" value="nombre"> <label>Nombre</label><br>'
             +'<input type="checkbox" name="fields[]" value="LibrosVenta"> <label>Libros en venta</label><br>'
             +'';
 

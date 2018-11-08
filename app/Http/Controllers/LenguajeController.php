@@ -19,6 +19,14 @@ class LenguajeController extends Controller
     public function index()
     {
         dd("si jala");
+
+        // $newlibro = new Autor();
+        // $newlibro->nombre = 'deitel';
+        // $newlibro->save();
+        // $newlibro = new Autor();
+        // $newlibro->nombre = 'pearson';
+        // $newlibro->save();
+
         // $newlibro = new Editorial();
         // $newlibro->nombre = 'porrua';
         // $newlibro->save();
