@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEditorialsTable extends Migration
+class CreateConveniosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateEditorialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('editoriales', function (Blueprint $table) {
+        Schema::create('convenios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('reputacion');
+            $table->integer('id_editorial');
+            $table->integer('cantidadLibros');
+            $table->float('descuentoporlibro');
+            $table->string('restricciones');
         });
     }
 
@@ -27,6 +29,6 @@ class CreateEditorialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('editoriales');
+        Schema::dropIfExists('convenios');
     }
 }

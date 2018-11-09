@@ -23,11 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', 'HomeController@resultados')->name("home");
 Route::resource('/libros','LibrosController');
 
-Route::resource('/area','AreaController');
-Route::resource('/libro','LibroController');
-Route::resource('/categoria','CategoriaController');
-Route::resource('/editorial','EditorialController');
-Route::resource('/autor','AutorController');
 Route::resource('/lenguaje','LenguajeController')->middleware('auth');
 Route::post('/lenguaje/obtener','LenguajeController@getAll')->middleware('auth');
 

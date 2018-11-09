@@ -18,27 +18,18 @@ class CreateLibrosTable extends Migration
         {
             $table->increments('id');
             $table->string('nombre');
-            $table->string('ruta');#
-            $table->string('tipo');#
-            $table->integer('edicion');
-            $table->boolean('satatus');
-            // $table->integer('paginas');
-            // $table->integer('año');
-            $table->string('genero');
-            $table->integer('autor_id')->unsigned();
-            $table->integer('editorial_id')->unsigned();
-            $table->timestamps();
+            $table->integer('id_editorial')->unsigned();
+            $table->integer('id_categoria')->unsigned();
+            $table->double('precio');
+            $table->string('nivel_dificultad');
         });
         // Schema::create('libros', function (Blueprint $table) {
         //     $table->increments('id');
-        //     $table->string('titulo');
-        //     $table->integer('edicion');
-        //     $table->integer('paginas');
-        //     $table->integer('año');
-        //     $table->integer('autor_id')->unsigned();
-        //     $table->integer('categoria_id')->unsigned();
-        //     $table->integer('editorial_id')->unsigned();
-        //     $table->timestamps();
+        //     $table->string('nombre');
+        //     $table->integer('id_editorial')->unsigned();
+        //     $table->integer('id_categoria')->unsigned();
+        //     $table->double('precio');
+        //     $table->string('nivel_dificultad');
         // });
     }
 
@@ -50,6 +41,6 @@ class CreateLibrosTable extends Migration
     public function down()
     {
         Schema::connection('mongodb')->dropIfExists('libros');
-        Schema::connection('mongodb')->drop('libros');
+        // Schema::connection('mongodb')->drop('libros');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAreasTable extends Migration
+class CentrouConvenio extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('areas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nombre');
-            $table->timestamps();
+        Schema::create('centrou_convenio', function (Blueprint $table) {
+            $table->integer('id_convenio')->unsigned();
+            $table->integer('id_centro')->unsigned();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateAreasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('centrou_convenio');
     }
 }
