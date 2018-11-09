@@ -16,9 +16,12 @@ class Editorial extends Model
     {
         return $this->table;
     }
-    
-    //Editorial __has_many__ libros
+
     public function libros(){
-      return $this->hasMany('App\libros');
+      return $this->hasMany('App\Libros');
+    }
+
+    public function convenios(){
+      return $this->hasMany('App\Convenio');
     }
 }
