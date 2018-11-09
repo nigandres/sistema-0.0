@@ -16,9 +16,12 @@ class Autor extends Model
     {
         return $this->table;
     }
-    
-    //Autor __has_many__ libros
+
     public function libros(){
-      return $this->hasMany('App\libros');
+      return $this->belongsToMany('App\Libro');
+    }
+
+    public function categorias(){
+      return $this->belongsToMany('App\Categoria');
     }
 }

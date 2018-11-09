@@ -17,12 +17,19 @@ class Libro extends Eloquent
     {
         return $this->collection;
     }
-    //Libro __belongs_to__ Autor
-    public function autor(){
-      return $this->belongsTo('App\Autor');
+
+    public function autores(){
+      return $this->belongsToMany('App\Autor');
     }
 
-    //Libro __belongs_to__ Editorial
+    public function categoria(){
+      return $this->belongsTo('App\Categoria');
+    }
+
+    public function materias(){
+      return $this->belongsToMany('App\Materia');
+    }
+
     public function editorial(){
       return $this->belongsTo('App\Editorial');
     }

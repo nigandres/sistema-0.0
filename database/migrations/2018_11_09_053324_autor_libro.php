@@ -16,7 +16,6 @@ class AutorLibro extends Migration
         Schema::create('autor_libro', function (Blueprint $table) {
             $table->integer('id_libro')->unsigned();
             $table->integer('id_autor')->unsigned();
-
         });
     }
 
