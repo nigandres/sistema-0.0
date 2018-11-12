@@ -16,8 +16,8 @@ class AutorLibro extends Migration
         Schema::connection('pgsql')->dropIfExists('autor_libro');
         Schema::connection('pgsql')->create('autor_libro', function(Blueprint $table) {
         // Schema::create('autor_libro', function (Blueprint $table) {
-            $table->string('libro_id')->unsigned()->references('_id')->on('libros');
-            $table->integer('autor_id')->unsigned()->references('id')->on('autores');
+            $table->string('libro_id')->references('_id')->on('libros');
+            $table->integer('autor_id')->references('id')->on('autores');
         });
     }
 

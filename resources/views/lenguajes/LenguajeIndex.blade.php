@@ -40,7 +40,15 @@
                                         @foreach($consulta as $datos => $valor)
                                         <tr>
                                             @foreach($valor->toArray() as $dato)
+                                            @if(is_array($dato))
+                                                <td>
+                                                    @foreach($dato as $cosa){{ $cosa }}
+                                                        <label>{{ $cosa }}</label><br>
+                                                    @endforeach
+                                                </td>
+                                            @else
                                             <td>{{ $dato }}</td>
+                                            @endif
                                             @endforeach
                                         </tr>
                                         @endforeach

@@ -21,6 +21,7 @@ class Libro extends Eloquent
     public function getTabla()
     {
         return $this->collection;
+        // return $this->table;
     }
 
     public function autores(){

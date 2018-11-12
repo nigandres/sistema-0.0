@@ -192,16 +192,16 @@ class LenguajeController extends Controller
                 $model = $modelo;
             }
         }
-        $relaciones = array('editorial','categoria');
+        // $relaciones = array('editorial','categoria');
         $campos = $request->input('fields');
         $campocondicion = $request->input('restriccion-dondeTabla');
         $operadorcondicion = $request->input('restriccion-dondeOpcion');
         $condicion = $request->input('restriccion-dondeValor');
         $ordenarpor = $request->input('restriccion-ordenar');
         $agruparpor = $request->input('restriccion-agrupar');
-        if ($relaciones != null) {
-            $model = $model::with($relaciones);
-        }
+        // if ($relaciones != null) {
+        //     $model = $model::with($relaciones);
+        // }
         if($campos != null){
             $model = $model->select($campos);
         }
@@ -234,26 +234,24 @@ class LenguajeController extends Controller
         //         })
         //     })
         // ->first();
+
+
         $anonima = function ($query) {
-            $query->where('nombre', '=', 'deitel');
-            dd($query);
+            return $query->where('id', '=', '2');
+            // return null;
+            // dd($query);
         };
 
         
-        $consulta = Libro::with(['autores'])
+        $consulta = Libro::with(['autores' => $anonima])
         ->whereHas('autores', $anonima)
-        // ->where('editorial','=','´porrua')
+        // ->whereIn('nombre', ['el saber'])
+        // ->where('nombre','=','porrua')
         ->get();
 
 
         dd($consulta);
 
-        // foreach($consulta as $valor){
-        //     foreach ($valor->toArray() as $key => $value) {
-        //         # code...
-        //     dd($key,$value);
-        //     }
-        // }
         return view('lenguajes.LenguajeIndex',compact('consulta'));
     }
 }
