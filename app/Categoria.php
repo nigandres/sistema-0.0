@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\HybridRelations;
 
-class Editorial extends Model
+class Categoria extends Model
 {
     use HybridRelations;
-    protected $connection = 'mysql';
-    protected $table = 'editoriales';
+    protected $connection = 'pgsql';
+    protected $table = 'categorias';
     public $timestamps = false;
     public function getConexion()
     {
@@ -20,11 +20,15 @@ class Editorial extends Model
         return $this->table;
     }
 
-    public function libros(){
-      return $this->hasMany('App\Libro','id_editorial');
+    public function autores(){
+      return $this->belongsToMany('App\Autor');
     }
 
-    public function convenios(){
-      return $this->hasMany('App\Convenio');
+    public function libros(){
+    	return $this->hasMany('App\Libro','id_categoria');
+    }
+
+    public function carreras(){
+      return $this->belongsToMany('App\Carrera');
     }
 }

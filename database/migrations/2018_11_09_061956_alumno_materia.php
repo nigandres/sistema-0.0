@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEditorialsTable extends Migration
+class AlumnoMateria extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateEditorialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('editoriales', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nombre');
-            $table->string('reputacion');
+        Schema::create('alumno_materia', function (Blueprint $table) {
+            $table->integer('id_aulmno')->unsigned();
+            $table->integer('id_materia')->unsigned();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateEditorialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('editoriales');
+        Schema::dropIfExists('alumno_materia');
     }
 }

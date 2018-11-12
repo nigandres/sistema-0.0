@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAreasTable extends Migration
+class Bibliografia extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('areas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nombre');
-            $table->timestamps();
+        Schema::create('bibliografia', function (Blueprint $table) {
+            $table->integer('id_libro')->unsigned();
+            $table->integer('id_materia')->unsigned();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateAreasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('bibliografia');
     }
 }

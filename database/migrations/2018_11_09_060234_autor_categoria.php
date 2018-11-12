@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEditorialsTable extends Migration
+class AutorCategoria extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateEditorialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('editoriales', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nombre');
-            $table->string('reputacion');
+        Schema::create('autor_categoria', function (Blueprint $table) {
+            $table->integer('id_autor')->unsigned();
+            $table->integer('id_categoria')->unsigned();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateEditorialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('editoriales');
+        Schema::dropIfExists('autor_categoria');
     }
 }
