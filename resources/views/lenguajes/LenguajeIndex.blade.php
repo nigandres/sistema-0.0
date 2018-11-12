@@ -31,7 +31,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                        @foreach($consulta[0]->toArray() as $col => $valor)
+                                        @foreach($consulta->first()->toArray() as $col => $valor)
                                             <td>{{ $col }}</td>
                                         @endforeach
                                         </tr>
@@ -42,8 +42,16 @@
                                             @foreach($valor->toArray() as $dato)
                                             @if(is_array($dato))
                                                 <td>
-                                                    @foreach($dato as $cosa){{ $cosa }}
+                                                    @foreach($dato as $cosa)
+                                                    @foreach($cosa as $roma)
+                                                        @if(is_array($roma))
+                                                        @foreach($roma as $amor)
+                                                        @endforeach
+                                                        @else
+                                                        {{ dd($roma) }}
                                                         <label>{{ $cosa }}</label><br>
+                                                        @endif
+                                                    @endforeach
                                                     @endforeach
                                                 </td>
                                             @else

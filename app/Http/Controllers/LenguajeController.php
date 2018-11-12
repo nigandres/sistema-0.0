@@ -223,7 +223,7 @@ class LenguajeController extends Controller
         // ::with(['editorial','categoria'])
         // ->where('nombre','like','%a%')
 
-        // $consulta = $model->get();
+        $consulta = $model->get();
 
 
         // $challenge = $this->challenges()
@@ -236,21 +236,27 @@ class LenguajeController extends Controller
         // ->first();
 
 
-        $anonima = function ($query) {
-            return $query->where('id', '=', '2');
-            // return null;
-            // dd($query);
-        };
+        // $anonima = function ($query) {
+        //     return $query->where('id', '=', '2');
+        //     // return null;
+        //     // dd($query);
+        // };
 
         
-        $consulta = Libro::with(['autores' => $anonima])
-        ->whereHas('autores', $anonima)
-        // ->whereIn('nombre', ['el saber'])
-        // ->where('nombre','=','porrua')
-        ->get();
+        // $consulta = Libro::with(['autores' => $anonima])
+        // // ->whereHas('autores', $anonima)
+        // // ->whereIn('nombre', ['el saber'])
+        // // ->where('nombre','=','porrua')
+        // ->get();
 
-
-        dd($consulta);
+        foreach ($consulta as $key => $modelos) {
+            foreach ($modelos->toArray() as $atributos) {
+                if($atributos == null){
+                    $consulta->forget($key);
+                }
+            }
+        }
+        // dd($consulta);
 
         return view('lenguajes.LenguajeIndex',compact('consulta'));
     }
