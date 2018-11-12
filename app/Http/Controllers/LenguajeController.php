@@ -238,7 +238,8 @@ class LenguajeController extends Controller
       // ->get();
         // $ejemplo = DB::connection('mongodb')->table('libros')->with('editorial')->get();
 
-
+        $model = new Libro();
+        $base = $model::with(['editorial','categoria'])->where('nombre','like','%a%')->get();
         $modelo = Libro::with(['editorial','categoria'])->where('nombre','like','%a%')->get();
         $modelo1 = Editorial::with(['libros'])->get();
         $ejemplo = Categoria::with(['libros'])->get();
