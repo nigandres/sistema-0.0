@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Alumno extends Model
 {
+	public $timestamps = false;
     public function carrera(){
       return $this->belongsTo('App\Carrera');
     }

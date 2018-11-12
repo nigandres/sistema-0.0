@@ -5,10 +5,14 @@ namespace App;
 // use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
+// class Libro extends Model
 class Libro extends Eloquent
 {
     protected $connection = 'mongodb';
     protected $collection = 'libros';
+    // protected $connection = 'mysql';
+    // protected $table = 'libros';
+    public $timestamps = false;
     public function getConexion()
     {
         return $this->connection;
@@ -23,7 +27,7 @@ class Libro extends Eloquent
     }
 
     public function categoria(){
-      return $this->belongsTo('App\Categoria');
+      return $this->belongsTo('App\Categoria','id_categoria');
     }
 
     public function materias(){
@@ -31,6 +35,6 @@ class Libro extends Eloquent
     }
 
     public function editorial(){
-      return $this->belongsTo('App\Editorial');
+      return $this->belongsTo('App\Editorial','id_editorial');
     }
 }

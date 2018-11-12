@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\HybridRelations;
 
 class Editorial extends Model
 {
+    use HybridRelations;
     protected $connection = 'mysql';
     protected $table = 'editoriales';
+    public $timestamps = false;
     public function getConexion()
     {
         return $this->connection;
@@ -18,7 +21,7 @@ class Editorial extends Model
     }
 
     public function libros(){
-      return $this->hasMany('App\Libros');
+      return $this->hasMany('App\Libro','id_editorial');
     }
 
     public function convenios(){

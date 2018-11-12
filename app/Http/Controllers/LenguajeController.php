@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Lenguaje;
+use App\User;
 use App\Libro;
 use App\Autor;
 use App\Editorial;
+use App\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class LenguajeController extends Controller
 {
@@ -18,6 +21,60 @@ class LenguajeController extends Controller
      */
     public function index()
     {
+        $editorial = new User();
+        $editorial->name = 'isra';
+        $editorial->email = 'isra@hot.com';
+        $editorial->password = Hash::make('111');
+        $editorial->save();
+        $editorial = new Categoria();
+        $editorial->nombre = 'informatica';
+        $editorial->save();
+        $editorial = new Categoria();
+        $editorial->nombre = 'fisica';
+        $editorial->save();
+        $editorial = new Categoria();
+        $editorial->nombre = 'ciencia';
+        $editorial->save();
+        $editorial = new Editorial();
+        $editorial->nombre = 'porrua';
+        $editorial->reputacion = 'buena';
+        $editorial->save();
+        $editorial = new Editorial();
+        $editorial->nombre = 'mcgrawhill';
+        $editorial->reputacion = 'buena';
+        $editorial->save();
+        $libro = new Libro();
+        $libro->id = count(Libro::all())+1;
+        $libro->nombre = 'el saber';
+        $libro->id_editorial = 1;
+        $libro->id_categoria = 1;
+        $libro->precio = 33;
+        $libro->nivel_dificultad = 'avanzado';
+        $libro->save();
+        $libro = new Libro();
+        $libro->id = count(Libro::all())+1;
+        $libro->nombre = 'el arte de code';
+        $libro->id_editorial = 2;
+        $libro->id_categoria = 2;
+        $libro->precio = 99.45;
+        $libro->nivel_dificultad = 'medio';
+        $libro->save();
+        $libro = new Libro();
+        $libro->id = count(Libro::all())+1;
+        $libro->nombre = 'muy ortogonal';
+        $libro->id_editorial = 1;
+        $libro->id_categoria = 3;
+        $libro->precio = 200;
+        $libro->nivel_dificultad = 'avanzado';
+        $libro->save();
+        $libro = new Libro();
+        $libro->id = count(Libro::all())+1;
+        $libro->nombre = 'agujeros negros';
+        $libro->id_editorial = 1;
+        $libro->id_categoria = 2;
+        $libro->precio = 312;
+        $libro->nivel_dificultad = 'basico';
+        $libro->save();
         dd("si jala");
 
         // $newlibro = new Autor();
@@ -175,6 +232,20 @@ class LenguajeController extends Controller
 
     public function getAll(Request $request)
     {
+        // $ejemplo = $librosos = DB::connection('mongodb')->table('libros')->load('editorial');
+      //   $ejemplo= Libro::join('libreria.editoriales as db2','libros.id_editorial','=','db2.id')
+      // ->select(['libros.*','db2.*'])
+      // ->get();
+        // $ejemplo = DB::connection('mongodb')->table('libros')->with('editorial')->get();
+
+
+        $modelo = Libro::with(['editorial','categoria'])->where('nombre','like','%a%')->get();
+        $modelo1 = Editorial::with(['libros'])->get();
+        $ejemplo = Categoria::with(['libros'])->get();
+
+
+        // $query2 = $ejemplo->get();
+        dd($modelo,$modelo1,$ejemplo);
         $db = null;
         $tabla = null;
         $campos = null;

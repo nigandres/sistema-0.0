@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', 'HomeController@resultados')->name("home");
 Route::resource('/libros','LibrosController');
 
-Route::resource('/lenguaje','LenguajeController')->middleware('auth');
+Route::resource('/lenguaje','LenguajeController')/*->middleware('auth')*/;
 Route::post('/lenguaje/obtener','LenguajeController@getAll')->middleware('auth');
 
 Route::get('/file-upload','RespaldosController@guardar');

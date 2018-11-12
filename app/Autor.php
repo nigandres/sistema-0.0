@@ -8,6 +8,7 @@ class Autor extends Model
 {
     protected $connection = 'pgsql';
     protected $table = 'autores';
+    public $timestamps = false;
     public function getConexion()
     {
         return $this->connection;
