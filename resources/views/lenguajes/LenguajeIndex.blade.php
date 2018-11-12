@@ -10,7 +10,7 @@
             </div>
         @endif
         <!--  -->
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -27,16 +27,17 @@
                                 <label class="form-control">
                                     Tablas
                                 </label>
+                                @if(count($consulta)!=0)
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                        @foreach($query[0]->toArray() as $col => $valor)
+                                        @foreach($consulta[0]->toArray() as $col => $valor)
                                             <td>{{ $col }}</td>
                                         @endforeach
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($query as $datos => $valor)
+                                        @foreach($consulta as $datos => $valor)
                                         <tr>
                                             @foreach($valor->toArray() as $dato)
                                             <td>{{ $dato }}</td>
@@ -45,6 +46,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                @endif
                             </div>
                         </form>
                     </div>

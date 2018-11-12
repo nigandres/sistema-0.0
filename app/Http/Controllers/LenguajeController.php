@@ -31,6 +31,14 @@ class LenguajeController extends Controller
         $editorial->email = 'isra@hot.com';
         $editorial->password = Hash::make('111');
         $editorial->save();
+        $editorial = new Autor();
+        $editorial->nombre = 'deitel';
+        $editorial->reputacion = 'buena';
+        $editorial->save();
+        $editorial = new Autor();
+        $editorial->nombre = 'paquito';
+        $editorial->reputacion = 'regular';
+        $editorial->save();
         $editorial = new Categoria();
         $editorial->nombre = 'informatica';
         $editorial->save();
@@ -56,6 +64,7 @@ class LenguajeController extends Controller
         $libro->precio = 33;
         $libro->nivel_dificultad = 'avanzado';
         $libro->save();
+        $libro->autores()->attach(1);
         $libro = new Libro();
         $libro->id = count(Libro::all())+1;
         $libro->nombre = 'el arte de code';
@@ -64,6 +73,7 @@ class LenguajeController extends Controller
         $libro->precio = 99.45;
         $libro->nivel_dificultad = 'medio';
         $libro->save();
+        $libro->autores()->attach(1);
         $libro = new Libro();
         $libro->id = count(Libro::all())+1;
         $libro->nombre = 'muy ortogonal';
@@ -72,6 +82,7 @@ class LenguajeController extends Controller
         $libro->precio = 200;
         $libro->nivel_dificultad = 'avanzado';
         $libro->save();
+        $libro->autores()->attach(2);
         $libro = new Libro();
         $libro->id = count(Libro::all())+1;
         $libro->nombre = 'agujeros negros';
@@ -80,6 +91,7 @@ class LenguajeController extends Controller
         $libro->precio = 312;
         $libro->nivel_dificultad = 'basico';
         $libro->save();
+        $libro->autores()->attach(1);
         dd("registros creados");
     }
 
@@ -180,24 +192,68 @@ class LenguajeController extends Controller
                 $model = $modelo;
             }
         }
+        $relaciones = array('editorial','categoria');
+        $campos = $request->input('fields');
+        $campocondicion = $request->input('restriccion-dondeTabla');
+        $operadorcondicion = $request->input('restriccion-dondeOpcion');
+        $condicion = $request->input('restriccion-dondeValor');
+        $ordenarpor = $request->input('restriccion-ordenar');
+        $agruparpor = $request->input('restriccion-agrupar');
+        if ($relaciones != null) {
+            $model = $model::with($relaciones);
+        }
+        if($campos != null){
+            $model = $model->select($campos);
+        }
+        if($campocondicion != null&&$operadorcondicion != null&&$condicion != null){
+            $model = $model->where($campocondicion,$operadorcondicion,$condicion);
+        }
+        if( ($campocondicion == null||$operadorcondicion == null||$condicion == null) && ($campocondicion != null||$operadorcondicion != null||$condicion != null) ){
+            return redirect()->back()->with('message', 'faltan parametros en las entradas de la condicion');
+        }
+        if($agruparpor != null){
+            $model = $model->groupBy($agruparpor);
+        }
+        if($ordenarpor != null){
+            $model = $model->orderBy($ordenarpor,$tipodeorden);
+        }
+
         // $modelo = new Libro();
         // $model = $model;
         // ::with(['editorial','categoria'])
         // ->where('nombre','like','%a%')
-        $query = $model->get();
-        // $posts = Libro::with(['editorial'])
-        // ->whereHas('editorial', function ($query) {
-        //     $query->where('nombre', '=', 'porrua');
-        // })->get();
-        
-        // dd($query);
 
-        // foreach($query as $valor){
+        // $consulta = $model->get();
+
+
+        // $challenge = $this->challenges()
+        // ->where(function($q) use ($user_id, $opponent_id) {
+        //     $q->where(function($query) use ($opponent_id, $user_id){
+        //             $query->where('player_1', $user_id)
+        //                   ->where('player_2', $opponent_id);
+        //         })
+        //     })
+        // ->first();
+        $anonima = function ($query) {
+            $query->where('nombre', '=', 'deitel');
+            dd($query);
+        };
+
+        
+        $consulta = Libro::with(['autores'])
+        ->whereHas('autores', $anonima)
+        // ->where('editorial','=','´porrua')
+        ->get();
+
+
+        dd($consulta);
+
+        // foreach($consulta as $valor){
         //     foreach ($valor->toArray() as $key => $value) {
         //         # code...
         //     dd($key,$value);
         //     }
         // }
-        return view('lenguajes.LenguajeIndex',compact('query'));
+        return view('lenguajes.LenguajeIndex',compact('consulta'));
     }
 }

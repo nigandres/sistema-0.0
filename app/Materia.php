@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\HybridRelations;
 
 class Materia extends Model
 {
+    use HybridRelations;
     protected $connection = 'mysql';
     protected $table = 'materias';
     public $timestamps = false;

@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\HybridRelations;
 
 class Autor extends Model
 {
+    use HybridRelations;
     protected $connection = 'pgsql';
     protected $table = 'autores';
     public $timestamps = false;
