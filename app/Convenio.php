@@ -6,7 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Convenio extends Model
 {
-	public $timestamps = false;
+	protected $connection = 'mysql';
+    protected $table = 'convenios';
+    public $timestamps = false;
+    public function getConexion()
+    {
+        return $this->connection;
+    }
+    public function getTabla()
+    {
+        return $this->table;
+    }
+
     public function editorial(){
       return $this->belongsTo('App\Editorial');
     }

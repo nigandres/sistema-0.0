@@ -12,6 +12,7 @@ class Libro extends Eloquent
     protected $collection = 'libros';
     // protected $connection = 'mysql';
     // protected $table = 'libros';
+    protected $hidden = ['_id','timestamps'];
     public $timestamps = false;
     public function getConexion()
     {

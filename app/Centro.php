@@ -6,7 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Centro extends Model
 {
-	public $timestamps = false;
+	protected $connection = 'mysql';
+    protected $table = 'centros';
+    public $timestamps = false;
+    public function getConexion()
+    {
+        return $this->connection;
+    }
+    public function getTabla()
+    {
+        return $this->table;
+    }
+
     public function carreras(){
       return $this->hasMany('App\Carrera');
     }

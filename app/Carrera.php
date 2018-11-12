@@ -6,20 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carrera extends Model
 {
-  public $timestamps = false;
-    public function centro(){
-      return $this->belongsTo('App\Centro');
+    protected $connection = 'mysql';
+    protected $table = 'carreras';
+    public $timestamps = false;
+    public function getConexion()
+    {
+        return $this->connection;
+    }
+    public function getTabla()
+    {
+        return $this->table;
     }
 
-    public function materias(){
-      return $this->hasMany('App\Materia');
-    }
+  public function centro(){
+    return $this->belongsTo('App\Centro');
+  }
 
-    public function alumnos(){
-      return $this->hasMany('App\Alumno');
-    }
+  public function materias(){
+    return $this->hasMany('App\Materia');
+  }
 
-    public function categorias(){
-      return $this->belongsToMany('App\Categoria');
-    }
+  public function alumnos(){
+    return $this->hasMany('App\Alumno');
+  }
+
+  public function categorias(){
+    return $this->belongsToMany('App\Categoria');
+  }
 }

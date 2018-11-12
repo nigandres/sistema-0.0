@@ -29,13 +29,17 @@
                                 </label>
                                 <table class="table">
                                     <thead>
-                                        <td></td>
+                                        <tr>
+                                        @foreach($query[0]->toArray() as $col => $valor)
+                                            <td>{{ $col }}</td>
+                                        @endforeach
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($query as $valor)
+                                        @foreach($query as $datos => $valor)
                                         <tr>
-                                            @foreach($valor as $coso)
-                                            <td>{{ $coso }}</td>
+                                            @foreach($valor->toArray() as $dato)
+                                            <td>{{ $dato }}</td>
                                             @endforeach
                                         </tr>
                                         @endforeach

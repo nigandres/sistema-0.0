@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Lenguaje;
-use App\User;
-use App\Libro;
+use App\Alumno;
 use App\Autor;
-use App\Editorial;
+use App\Carrera;
 use App\Categoria;
+use App\Centro;
+use App\Convenio;
+use App\Editorial;
+use App\Libro;
+use App\Materia;
+use App\User;
+use App\Lenguaje;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -70,98 +75,12 @@ class LenguajeController extends Controller
         $libro = new Libro();
         $libro->id = count(Libro::all())+1;
         $libro->nombre = 'agujeros negros';
-        $libro->id_editorial = 1;
+        $libro->id_editorial = 2;
         $libro->id_categoria = 2;
         $libro->precio = 312;
         $libro->nivel_dificultad = 'basico';
         $libro->save();
-        dd("si jala");
-
-        // $newlibro = new Autor();
-        // $newlibro->nombre = 'deitel';
-        // $newlibro->save();
-        // $newlibro = new Autor();
-        // $newlibro->nombre = 'pearson';
-        // $newlibro->save();
-
-        // $newlibro = new Editorial();
-        // $newlibro->nombre = 'porrua';
-        // $newlibro->save();
-
-        // $newlibro = new Libro();
-        // $newlibro->titulo = 'nepe';
-        // $newlibro->edicion = 1;
-        // $newlibro->save();
-        // $newlibro = new Libro();
-        // $newlibro->titulo = 'nepe';
-        // $newlibro->edicion = 1;
-        // $newlibro->save();
-        // $newlibro = new Libro();
-        // $newlibro->titulo = 'nepe';
-        // $newlibro->edicion = 3;
-        // $newlibro->save();
-        // $newlibro = new Libro();
-        // $newlibro->titulo = 'nepe';
-        // $newlibro->edicion = 2;
-        // $newlibro->save();
-        // $newlibro = new Libro();
-        // $newlibro->titulo = 'ginava';
-        // $newlibro->edicion = 1;
-        // $newlibro->save();
-        // $newlibro = new Libro();
-        // $newlibro->titulo = 'ginava';
-        // $newlibro->edicion = 1;
-        // $newlibro->save();
-
-        $modelos = collect(['Libro' => new Libro(),'Autor' => new Autor(),'Editorial' => new Editorial()]);
-
-        // Request $request;
-        // dd($modelos);
-        // foreach ($modelos as $modelo) {
-        //     if($modelo->getTabla() == $request->input('tabla')){
-        //         $db = $modelo->getConexion();
-        //         $tabla = $modelo->getTabla();
-        //     }
-        // }
-
-        $db = 'mongodb';
-        $tabla = 'libros';
-        $campos = array('titulo','edicion');
-        $campocondicion = 'titulo';
-        $operadorcondicion = '=';
-        $condicion = 'nepe';
-        $agruparpor = array('titulo');
-        $ordenarpor = 'edicion';
-        $tipodeorden = 'asc';
-        $libroMongodb = Autor::all();
-        // $libroMongodb = Libro::where('titulo','=','ginava')->get();
-        $librosos = DB::connection($db)->table($tabla)
-        ->select($campos)
-        ->where($campocondicion,$operadorcondicion,$condicion)
-        ->groupBy($agruparpor)
-        ->orderBy($ordenarpor,$tipodeorden)
-        // ->havingRaw('count(edicion) = 4')
-        ->having('edicion', '=', '1')
-        ->toSql();
-        // $librosos = DB::connection('mongodb')->table('libros')->where('titulo','=','nepe')->get();
-        dd($libroMongodb,$librosos);
-
-
-
-
-
-
-
-
-        $tablas = DB::select('show tables');
-        unset($tablas[4]);
-        unset($tablas[6]);
-        unset($tablas[7]);
-        // foreach ($tablas as $tabla) {
-        //     $columnas[] = DB::select('describe '.$tabla->Tables_in_datawarehouse);
-        // }
-        // dd($tablas,$columnas[0][1]->Field);
-        return view('lenguajes.LenguajeIndex',compact(['tablas']));
+        dd("registros creados");
     }
 
     /**
@@ -232,22 +151,8 @@ class LenguajeController extends Controller
 
     public function getAll(Request $request)
     {
-        // $ejemplo = $librosos = DB::connection('mongodb')->table('libros')->load('editorial');
-      //   $ejemplo= Libro::join('libreria.editoriales as db2','libros.id_editorial','=','db2.id')
-      // ->select(['libros.*','db2.*'])
-      // ->get();
-        // $ejemplo = DB::connection('mongodb')->table('libros')->with('editorial')->get();
-
-        $model = new Libro();
-        $base = $model::with(['editorial','categoria'])->where('nombre','like','%a%')->get();
-        $modelo = Libro::with(['editorial','categoria'])->where('nombre','like','%a%')->get();
-        $modelo1 = Editorial::with(['libros'])->get();
-        $ejemplo = Categoria::with(['libros'])->get();
-
-
-        // $query2 = $ejemplo->get();
-        dd($modelo,$modelo1,$ejemplo);
         $db = null;
+        $model = null;
         $tabla = null;
         $campos = null;
         $campocondicion = null;
@@ -256,38 +161,43 @@ class LenguajeController extends Controller
         $ordenarpor = null;
         $agruparpor = null;
         $tipodeorden = 'asc';
-        $modelos = collect(['Libro' => new Libro(),'Autor' => new Autor(),'Editorial' => new Editorial()]);
+        $modelos = collect([
+            'Alumno' => new Alumno(),
+            'Autor' => new Autor(),
+            'Carrera' => new Carrera(),
+            'Categoria' => new Categoria(),
+            'Centro' => new Centro(),
+            'Convenio' => new Convenio(),
+            'Editorial' => new Editorial(),
+            'Libro' => new Libro(),
+            'Materia' => new Materia()
+        ]);
         $librosos = null;
         foreach ($modelos as $modelo) {
             if($modelo->getTabla() == $request->input('tabla')){
                 $db = $modelo->getConexion();
                 $tabla = $modelo->getTabla();
+                $model = $modelo;
             }
         }
-        $campos = $request->input('fields');
-        $campocondicion = $request->input('restriccion-dondeTabla');
-        $operadorcondicion = $request->input('restriccion-dondeOpcion');
-        $condicion = $request->input('restriccion-dondeValor');
-        $ordenarpor = $request->input('restriccion-ordenar');
-        $agruparpor = $request->input('restriccion-agrupar');
-        $librosos = DB::connection($db)->table($tabla);
-        if($campos != null){
-            $librosos = $librosos->select($campos);
-        }
-        if($campocondicion != null&&$operadorcondicion != null&&$condicion != null){
-            $librosos = $librosos->where($campocondicion,$operadorcondicion,$condicion);
-        }
-        if( ($campocondicion == null||$operadorcondicion == null||$condicion == null) && ($campocondicion != null||$operadorcondicion != null||$condicion != null) ){
-            return redirect()->back()->with('message', 'faltan parametros en las entradas de la condicion');
-        }
-        if($agruparpor != null){
-            $librosos = $librosos->groupBy($agruparpor);
-        }
-        if($ordenarpor != null){
-            $librosos = $librosos->orderBy($ordenarpor,$tipodeorden);
-        }
-        $query = $librosos->get();
-        // dd($query,$db,$tabla,$campos,$request);
+        // $modelo = new Libro();
+        // $model = $model;
+        // ::with(['editorial','categoria'])
+        // ->where('nombre','like','%a%')
+        $query = $model->get();
+        // $posts = Libro::with(['editorial'])
+        // ->whereHas('editorial', function ($query) {
+        //     $query->where('nombre', '=', 'porrua');
+        // })->get();
+        
+        // dd($query);
+
+        // foreach($query as $valor){
+        //     foreach ($valor->toArray() as $key => $value) {
+        //         # code...
+        //     dd($key,$value);
+        //     }
+        // }
         return view('lenguajes.LenguajeIndex',compact('query'));
     }
 }
